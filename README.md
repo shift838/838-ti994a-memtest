@@ -1,4 +1,4 @@
-TI-99/4A Memory Expansion Diagnostic
+#TI-99/4A Memory Expansion Diagnostic
 This project is a modular fork of the original ti994a-memtest developed by JediMatt42 (Matthew Splett). This version introduces native support for the 838-MEGARAM card and restructures the codebase into distinct, manageable modules.
 
 Project Overview
