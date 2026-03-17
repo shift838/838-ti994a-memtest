@@ -1,38 +1,39 @@
-# TI-99/4A Memory Expansion Test 
+TI-99/4A Memory Expansion Diagnostic
+This project is a modular fork of the original ti994a-memtest developed by JediMatt42 (Matthew Splett). This version introduces native support for the 838-MEGARAM card and restructures the codebase into distinct, manageable modules.
 
-The purpose of this code is to run an expansion memory test from a TI-99/4A console that operates within an 8K cartridge and console scratchpad ram. The target memory to test is not used by the operation of the program.
+Project Overview
+The utility performs comprehensive expansion memory diagnostics directly from a TI-99/4A console. It is specifically engineered to operate within an 8K cartridge space and console scratchpad RAM, ensuring that the memory being tested remains entirely untouched by the program's internal operations.
 
-These are destructive memory tests... pre-loaded interrupt routines or RAM Disk content will be **erased**.
+[!WARNING]
+Data Loss Notice: These are destructive memory tests. Executing these routines will erase any existing RAM Disk content or pre-loaded interrupt routines.
 
-## Supported Cards
+Supported Cards:
+• 838-MEGARAM (New)
+• SAMS Memory (Up to 16MB)
+• Basic 32K Expansions (Internal or External)
+• Myarc 128K / 512K
+• Foundation 128K (Including 512K modifications)
+• Corcomp 256K / 512K RAM Disk
 
-* Basic 32K memory expansions ( internal or external )
-* Foundation 128K (or 512K modded) 
-* Myarc 128K or 512K 
-* SAMS Memory (upto 16M)
-* Corcomp 256k/512k ramdisk
+***Legacy cards may fallback to a standard 32K detection.
+Note: Due to overlapping paging schemes, certain SAMS hardware errors may incorrectly identify as a 64K Foundation card.
 
-Other cards may fallback to basic 32K.
+Build Instructions
+Compiler: 
+• This was designed to be compiled with GCC 4.0.0
+    - Download a complete auto-install script at https://github.com/shift838/gcc-tms9900_install
+• Add your tms9900gcc bin directory to your system path.
+• Library: Set the environment variable for Tursi's libti99 GCC library path.
 
-A SAMS hardware error may look like a 64K Foundation card due to overlapping paging schemes.
+Compile: Run make to generate the exptest_c.bin (ready to use 8K cartridge image for emulators or burning to an EPROM).
 
-## Build
+Technical Highlights
+This build serves as a demonstration of using GCC to produce TI-99/4A code that functions without requiring the 32K expansion RAM:
 
-Set your TI tms9900gcc bin folder into your path. 
-Set environment variable for path to Tursi's libti99 gcc library.
-Edit or comment out the part in the Makefile where it copies the rom into a place for classic99. 
+- Interrupts: Maintained in the OFF state.
+- Stack: The GCC stack is mapped to run backwards from the top of the scratchpad (>8400).
+- Memory Mapping: The data segment (>8320) is positioned immediately following the GCC workspace (>8300).
+- Persistence: All constants and code are stored within the 8K cartridge ROM space (>6000).
 
-run: make
-
-It will produce a exptest_c.bin 8K cartridge rom image. 
-
-## Cool bits...
-
-This build is an example of using GCC to run code that doesn't actually require the 32k expansion ram for the TI-99/4A. It leaves interrupts off, sets the gcc stack to work backwards from the top of the TI scratchpad space (>8400). It sets the data segment (>8320) to begin write after the gcc workspace (>8300). And all of the constant and code goes into the 8k cartridge rom space (>6000). 
-
-## License
-
-Public Domain - Have fun, or see License.txt
-
-
-
+License
+Public Domain — Use freely. For more information, see License.txt.
