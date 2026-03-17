@@ -46,9 +46,11 @@ LDFLAGS = \
 exptest_c.elf: $(OBJECT_LIST)
 	$(LD) $(OBJECT_LIST) $(LDFLAGS) -L$(LIBTI99) -o exptest_c.elf -lti99 -Map=mapfile
 
-# 2. Binary step: Creates the TI-99/4A Cartridge Binary
+# 2. Binary step: Creates the TI-99/4A Cartridge Binary and truncates to 8192 bytes
 exptest_c.bin: exptest_c.elf
 	$(OBJCOPY) -O binary exptest_c.elf exptest_c.bin
+	truncate -s 8192 exptest_c.bin
+	@echo "The binary has been truncated to 8192 bytes and is ready for use in an emulator or to burn to an EPROM."
 
 # Cleanup
 clean:
