@@ -5,9 +5,9 @@ CC       = tms9900-unknown-elf-gcc
 AS       = tms9900-unknown-elf-as
 LD       = tms9900-unknown-elf-ld
 OBJCOPY  = tms9900-unknown-elf-objcopy
-LIBTI99  = /home/shift838/libti99
+LIBTI99  = /home/shift838/libTi99All
 
-CFLAGS_COMMON = -std=c99 --save-temp -I$(LIBTI99)
+CFLAGS_COMMON = -std=c99 --save-temp -DTI99 -I$(LIBTI99)
 
 # Default rule for most .c files (optimized for size)
 %.o: %.c
@@ -35,7 +35,8 @@ OBJECT_LIST = \
     expansion_foundation.o \
     expansion_corcomp.o \
     expansion_sams.o \
-    utils.o
+    utils.o \
+    hasram.o
 
 # Linker flags
 LDFLAGS = \

@@ -1,41 +1,25 @@
 #include <vdp.h>
 #include <system.h>
+#include <string.h>
 
-extern char mcolor;
-extern char scolor;
-extern char fcolor;
+void writehex(unsigned int row, unsigned int col, const unsigned int value)
+{
+    char buf[5];
+    static const char hex[] = "0123456789ABCDEF";
 
-#define SCREEN_COLOR mcolor
-#define ERROR_COLOR  fcolor
-#define SUCCESS_COLOR scolor
+    buf[0] = hex[(value >> 12) & 0xF];
+    buf[1] = hex[(value >> 8) & 0xF];
+    buf[2] = hex[(value >> 4) & 0xF];
+    buf[3] = hex[(value >> 0) & 0xF];
+    buf[4] = 0;
 
-extern const unsigned int byte2hex[256];   // correct signature
-extern void writestring(int row, int col, char *pStr);
-
-void __attribute__ ((noinline))
-writehex(unsigned int row, unsigned int col, const unsigned int value) {
-  unsigned char buf[3] = { 0, 0, 0 };
-  *((unsigned int*)buf) = byte2hex[value >> 8];
-  writestring(row, col, buf);
-  *((unsigned int*)buf) = byte2hex[0xFF & value];
-  writestring(row, col + 2, buf);
+    writestring(row, col, buf);
 }
 
-void __attribute__ ((noinline))
-printSummary(int ec) {
-  if (ec == 0) {
-    VDP_SET_REGISTER(VDP_REG_COL, SUCCESS_COLOR);
-    writestring(21, 11, "All Memory Passed");
-  } else {
-    VDP_SET_REGISTER(VDP_REG_COL, ERROR_COLOR);
-    writestring(21, 14, "Found errors");
-  }
-}
-
-int __attribute__ ((noinline))
-hasRam(void) {
-  volatile int* lower_exp = (volatile int*) 0x2000;
-  *lower_exp = 0;
-  *lower_exp = 0x1234;
-  return (*lower_exp == 0x1234);
+void printSummary(int ec)
+{
+    if (ec == 0)
+        writestring(12, 10, "ALL TESTS PASSED");
+    else
+        writestring(12, 10, "ERRORS DETECTED");
 }
