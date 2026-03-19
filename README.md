@@ -19,9 +19,9 @@ Data Loss Notice: These are destructive memory tests. Executing these routines w
 
 # Build Instructions
 Compiler Setup:
-* Compiled required GCC 4.0.0. Auto-install script: https://github.com/shift838/gcc-tms9900_install
+* Compiler required GCC 4.4.0. Auto-install script: https://github.com/shift838/gcc-tms9900_install
 * Add your tms9900gcc bin directory to your system path.
-* Library: Set the environment variable for Tursi's libti99 GCC library path.
+* Library: Set the environment variable for Tursi's libTi99All GCC library path.
 
 Compile:
 Run make to generate the exptest_c.bin (8K cartridge image).
