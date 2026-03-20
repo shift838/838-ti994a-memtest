@@ -15,7 +15,7 @@ void __attribute__ ((noinline)) foundationBank(int page, int crubase) {
 
   __asm__(
     "MOV %1, r12\n\t"
-    "LDCR %0,4\n\t"
+    "LDCR %0,6\n\t"
     : : "r"(adjusted), "r"(crubase+2) : "r12"
   );
 }
@@ -32,13 +32,13 @@ int __attribute__ ((noinline)) hasFoundation(int crubase) {
 
 int __attribute__ ((noinline)) foundationPagecount(int crubase) {
   volatile int* lower_exp = (volatile int*) 0x2000;
-  for(int i = 0; i < 16; i++) {
+  for(int i = 0; i < 64; i++) {
     foundationBank(i, crubase);
     *lower_exp = 0x1234;
   }
   foundationBank(0, crubase);
   int pages = 0;
-  while(pages < 16 && *lower_exp != 0xFFFF) {
+  while(pages < 64 && *lower_exp != 0xFFFF) {
     *lower_exp = 0xFFFF;
     foundationBank(++pages, crubase);
   }
