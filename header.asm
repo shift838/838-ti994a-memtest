@@ -17,11 +17,11 @@
 # Color bytes
   TEXT 'COLOR'
 mcolor:
-  byte 0x17
+  byte 0xF4
 scolor:
-  byte 0x12
+  byte 0x13
 fcolor:
-  byte 0x16
+  byte 0x19
   even
 
 # Start of subprogram list (unused)

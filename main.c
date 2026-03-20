@@ -44,7 +44,9 @@ int corcompCru;
 
 void main(int passcount)
 {
+    // --- INITIALIZATION & STARTUP COLOR ---
     set_text();
+    // Sets screen to White Text on Dark Blue (mcolor: 0xF4)
     VDP_SET_REGISTER(VDP_REG_COL, SCREEN_COLOR);
     vdpmemset(0x0000, ' ', nTextEnd);
     charsetlc();
@@ -72,6 +74,8 @@ void main(int passcount)
     if (!hasRam())
     {
         writestring(2, 0, "No RAM detected");
+        // Update to Error Color if no RAM is found
+        VDP_SET_REGISTER(VDP_REG_COL, ERROR_COLOR);
         while (1) { }
     }
     else if (hasSams() && samsPagecount() > (128 / 4))
@@ -115,7 +119,6 @@ void main(int passcount)
     else if (memtype == MYARC)
     {
         pagecount = foundationPagecount(0x1000);
-        //pagecount = 64;
     }
     else if (memtype == FOUNDATION)
     {
@@ -152,6 +155,18 @@ void main(int passcount)
                 ec += testCorcomp(pagecount);
                 break;
         }
+    }
+
+    // --- TEST RESULT COLOR UPDATE ---
+    if (ec == 0)
+    {
+        // Change screen to Black Text on Light Green (scolor: 0x13)
+        VDP_SET_REGISTER(VDP_REG_COL, SUCCESS_COLOR);
+    }
+    else
+    {
+        // Change screen to Black Text on Light Red (fcolor: 0x19)
+        VDP_SET_REGISTER(VDP_REG_COL, ERROR_COLOR);
     }
 
     printSummary(ec);
