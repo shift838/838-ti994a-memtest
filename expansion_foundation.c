@@ -48,7 +48,7 @@ int __attribute__ ((noinline)) foundationPagecount(int crubase) {
 
 int __attribute__ ((noinline)) testFoundation(int pagecount, int crubase) {
   writestring(2, 20, int2str(32*pagecount));
-  writestring(2, 23, "K");
+  writestring(2, 24, "K");
 
   int ec = 0;
   for (int j = 0; j < pagecount && ec == 0; j++) {
