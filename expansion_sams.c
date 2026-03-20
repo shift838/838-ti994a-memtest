@@ -108,7 +108,7 @@ testSamsBlock(int j) {
 int __attribute__ ((noinline))
 testSams(int pagecount) {
   writestring(2, 16, int2str(4*pagecount));
-  writestring(2, 21, "K");
+  writestring(2, 22, "K");
 
   int ec = 0;
   for (int j = 0; j < pagecount && ec == 0; j += 8 ) {
