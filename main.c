@@ -114,8 +114,8 @@ void main(int passcount)
     }
     else if (memtype == MYARC)
     {
-        // pagecount = foundationPagecount(0x1000);
-        pagecount = 64;
+        pagecount = foundationPagecount(0x1000);
+        //pagecount = 64;
     }
     else if (memtype == FOUNDATION)
     {
