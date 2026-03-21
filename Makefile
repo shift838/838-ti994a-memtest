@@ -5,7 +5,7 @@ CC       = tms9900-unknown-elf-gcc
 AS       = tms9900-unknown-elf-as
 LD       = tms9900-unknown-elf-ld
 OBJCOPY  = tms9900-unknown-elf-objcopy
-LIBTI99  = $HOME/libTi99All
+LIBTI99 = $(HOME)/libTi99All
 
 CFLAGS_COMMON = -std=c99 --save-temp -DTI99 -I$(LIBTI99)
 
