@@ -69,7 +69,7 @@ void main(int passcount)
 	writestring(2, 0, "Detecting RAM, please wait...");
     }
 
-    writestring(23, 0, "- Modified by SHIFT838 & GaryOPA -");
+    writestring(23, 3, "- Modified by SHIFT838 & GaryOPA -");
 
     int memtype = NOMEM;
 
