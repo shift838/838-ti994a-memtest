@@ -9,7 +9,7 @@ Data Loss Notice: These are destructive memory tests. Executing these routines w
 
 # Supported Cards
 * 838-MEGARAM (New)
-* SAMS Memory (Up to 16MB)
+* SAMS Memory (Up to 32MB)
 * Basic 32K Expansions (Internal or External)
 * Myarc 128K / 512K
 * Foundation 128K (Including 512K modifications)
