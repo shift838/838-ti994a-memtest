@@ -58,13 +58,15 @@ void main(int passcount)
     {
         try_limit = 1;
         passcount = 1;
-        writestring(0, 0, "Memory Quick Check ver ");
-        writestring(0, 23, ver);
+        writestring(0, 5, "Memory Quick Check V");
+        writestring(0, 26, ver);
+	writestring(2, 0, "Detecting RAM, please wait...");
     }
     else
     {
-        writestring(0, 0, "Expansion Memory Test ver ");
+        writestring(0, 3, "Expansion Memory Test ver ");
         writestring(0, 26, ver);
+	writestring(2, 0, "Detecting RAM, please wait...");
     }
 
     writestring(23, 0, "- Modified by SHIFT838 & GaryOPA -");
@@ -80,26 +82,31 @@ void main(int passcount)
     }
     else if (hasSams() && samsPagecount() > (128 / 4))
     {
+	writestring(2, 0, "                                ");
         writestring(2, 0, "SAMS detected");
         memtype = SAMS;
     }
     else if (hasCorcomp(0x1000) || hasCorcomp(0x1400))
     {
+	writestring(2, 0, "                                ");
         writestring(2, 0, "Corcomp 256k/512k");
         memtype = CORCOMP;
     }
     else if (hasFoundation(0x1000))
     {
+	writestring(2, 0, "                                ");
         writestring(2, 0, "Myarc detected");
         memtype = MYARC;
     }
     else if (hasFoundation(0x1E00))
     {
+	writestring(2, 0, "                                ");
         writestring(2, 0, "Foundation detected");
         memtype = FOUNDATION;
     }
     else
     {
+	writestring(2, 0, "                                ");
         writestring(2, 0, "Standard 32K detected");
         memtype = BASE32K;
     }

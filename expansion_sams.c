@@ -58,14 +58,14 @@ int __attribute__ ((noinline)) samsPagecount() {
   samsMapOn();
   volatile int* lower_exp = (volatile int*) 0x2000;
 
-  for(int i = 0; i < 4096; i++) {
+  for(int i = 0; i < 8192; i++) {
     samsMapPage(i, 0x2000);
     *lower_exp = 0x1234;
   }
 
   samsMapPage(0, 0x2000);
   int pages = 0;
-  while(pages < 4096 && *lower_exp != 0xFFFF) {
+  while(pages < 8192 && *lower_exp != 0xFFFF) {
     *lower_exp = 0xFFFF;
     samsMapPage(++pages, 0x2000);
   }
@@ -107,7 +107,8 @@ testSamsBlock(int j) {
 
 int __attribute__ ((noinline))
 testSams(int pagecount) {
-  writestring(2, 16, int2str(4*pagecount));
+  writestring(2, 16, uint2str((unsigned int)4 * pagecount));
+//  writestring(2, 16, int2str(4*pagecount));
   writestring(2, 22, "K");
 
   int ec = 0;
