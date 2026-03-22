@@ -8,7 +8,7 @@ The utility performs comprehensive expansion memory diagnostics directly from a 
 Data Loss Notice: These are destructive memory tests. Executing these routines will erase any existing RAM Disk content or pre-loaded interrupt routines.
 
 # Supported Cards
-* 838-MEGARAM (New)
+* 838-MEGARAM 512K / 1024K / 1536K / 2048K
 * SAMS Memory (Up to 32MB)
 * Basic 32K Expansions (Internal or External)
 * Myarc 128K / 512K
